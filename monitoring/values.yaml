@@ -1,0 +1,114 @@
+loki:
+  enabled: true
+  deploymentMode: SingleBinary
+  loki:
+    revisionHistoryLimit: 3
+    auth_enabled: false
+    commonConfig:
+      replication_factor: 1
+    storage:
+      type: filesystem
+    schemaConfig:
+      configs:
+        - from: 2024-04-01
+          store: tsdb
+          object_store: filesystem
+          schema: v13
+          index:
+            prefix: index_
+            period: 24h
+    structuredConfig:
+      query_range:
+        align_queries_with_step: true
+      memberlist:
+        bind_addr: []
+  test:
+    enabled: false
+  write:
+    replicas: 0
+  read:
+    replicas: 0
+  singleBinary:
+    replicas: 1
+  monitoring:
+    dashboards:
+      enabled: false
+    serviceMonitor:
+      enabled: false
+    selfMonitoring:
+      grafanaAgent:
+        installOperator: false
+    rules:
+      enabled: false
+  lokiCanary:
+    enabled: false
+  gateway:
+    enabled: false
+  backend:
+    replicas: 0
+  tracing:
+    enabled: false
+
+grafana:
+  enabled: true
+  adminUser:
+  adminPassword:
+  replicas: 1
+  sidecar:
+    datasources:
+      label: ""
+      labelValue: ""
+      enabled: true
+      maxLines: 1000
+    dashboards:
+      enabled: true
+      label: "grafana_dashboard"
+      labelValue: "1"
+      searchNamespace: ALL
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+        - name: "default"
+          orgId: 1
+          folder: ""
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/default
+  dashboardsConfigMaps:
+    main-logs:
+      "grafana-dashboards-main-logs"
+    api-gateway:
+      "grafana-dashboards-api-gateway"
+    attachment-store:
+      "grafana-dashboards-attachment-store"
+    authenticator:
+      "grafana-dashboards-authenticator"
+    currency-manager:
+      "grafana-dashboards-currency-manager"
+    email-sender:
+      "grafana-dashboards-email-sender"
+    expense-manager:
+      "grafana-dashboards-expense-manager"
+    finance-adapter:
+      "grafana-dashboards-finance-adapter"
+    group-manager:
+      "grafana-dashboards-group-manager"
+    payment-manager:
+      "grafana-dashboards-payment-manager"
+    report-creator:
+      "grafana-dashboards-report-creator"
+    user-details-manager:
+      "grafana-dashboards-user-details-manager"
+  image:
+    tag: 10.3.3
+
+prometheus:
+  global:
+    scrape_interval: 30s
+  enabled: true
+  isDefault: false
+  datasource:
+    jsonData: "{}"

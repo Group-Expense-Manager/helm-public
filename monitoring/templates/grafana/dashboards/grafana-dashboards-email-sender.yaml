@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards-email-sender
+  labels:
+    grafana_dashboard: "1"
+data:
+  email-sender.json: |
+    {{ .Files.Get "dashboards/email-sender.json" | nindent 4 }}

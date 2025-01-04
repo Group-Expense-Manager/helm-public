@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards-group-manager
+  labels:
+    grafana_dashboard: "1"
+data:
+  group-manager.json: |
+    {{ .Files.Get "dashboards/group-manager.json" | nindent 4 }}

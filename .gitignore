@@ -1,0 +1,6 @@
+# Chart dependencies
+**/charts/*.tgz
+
+/git-log.csv
+/monitoring/charts/
+/.idea/

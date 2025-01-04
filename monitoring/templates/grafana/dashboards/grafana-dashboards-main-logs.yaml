@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards-main-logs
+  labels:
+    grafana_dashboard: "1"
+data:
+  main-logs.json: |
+    {{ .Files.Get "dashboards/main-logs.json" | nindent 4 }}

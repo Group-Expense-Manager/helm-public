@@ -1,0 +1,1 @@
+{{- include "gem-lib.deployment" (dict "Values" .Values.authenticator "Common" .Values.common) -}}

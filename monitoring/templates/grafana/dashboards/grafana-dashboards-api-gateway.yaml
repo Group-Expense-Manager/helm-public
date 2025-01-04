@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards-api-gateway
+  labels:
+    grafana_dashboard: "1"
+data:
+  api-gateway.json: |
+    {{ .Files.Get "dashboards/api-gateway.json" | nindent 4 }}

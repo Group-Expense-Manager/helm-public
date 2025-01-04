@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards-payment-manager
+  labels:
+    grafana_dashboard: "1"
+data:
+  payment-manager.json: |
+    {{ .Files.Get "dashboards/payment-manager.json" | nindent 4 }}

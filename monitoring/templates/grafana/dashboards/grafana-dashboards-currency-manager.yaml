@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards-currency-manager
+  labels:
+    grafana_dashboard: "1"
+data:
+  currency-manager.json: |
+    {{ .Files.Get "dashboards/currency-manager.json" | nindent 4 }}

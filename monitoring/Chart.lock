@@ -1,0 +1,12 @@
+dependencies:
+- name: loki
+  repository: https://grafana.github.io/helm-charts
+  version: 6.24.0
+- name: grafana
+  repository: https://grafana.github.io/helm-charts
+  version: 8.8.2
+- name: prometheus
+  repository: https://prometheus-community.github.io/helm-charts
+  version: 26.0.1
+digest: sha256:fc093b68e227e27bc55ae52383578da917b45596297b9517f70642b13ab05519
+generated: "2024-12-29T11:14:54.50925669+01:00"

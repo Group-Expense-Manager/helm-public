@@ -1,0 +1,251 @@
+common:
+  dockerHub: lawos98
+  namespace: gem
+  port: 8080
+  servicePort: 8080
+  replicas: 1
+  startupProbe:
+    initialDelaySeconds: 30
+    periodSeconds: 5
+    failureThreshold: 20
+  livenessProbe:
+    failureThreshold: 5
+    periodSeconds: 5
+  podTemplate:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
+
+apiGateway:
+  name: api-gateway
+  # uncomment to use local image (default is from docker hub)
+  # image: api-gateway:latest
+  type: NodePort
+  nodePort: 30080
+  env:
+  - name: LOKI_URL
+    configMapKeyRef:
+      name: gem-config-map
+      key: loki-url
+  - name: HOSTNAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
+  - name: TOKEN_SECRET_KEY
+    secretKeyRef:
+      name: gem-secret
+      key: token-secret-key
+
+attachmentStore:
+  name: attachment-store
+  # uncomment to use local image (default is from docker hub)
+#  image: attachment-store:latest
+  type: NodePort
+  nodePort: 30081
+  env:
+  - name: LOKI_URL
+    configMapKeyRef:
+      name: gem-config-map
+      key: loki-url
+  - name: HOSTNAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
+  - name: ATTACHMENT_STORE_DB_URI
+    secretKeyRef:
+      name: gem-secret
+      key: attachment-store-db-uri
+
+authenticator:
+  name: authenticator
+  # uncomment to use local image (default is from docker hub)
+#  image: authenticator:latest
+  type: NodePort
+  nodePort: 30082
+  env:
+  - name: LOKI_URL
+    configMapKeyRef:
+      name: gem-config-map
+      key: loki-url
+  - name: HOSTNAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
+  - name: AUTHENTICATOR_DB_URI
+    secretKeyRef:
+      name: gem-secret
+      key: authenticator-db-uri
+  - name: TOKEN_SECRET_KEY
+    secretKeyRef:
+      name: gem-secret
+      key: token-secret-key
+  - name: GEM_URL
+    configMapKeyRef:
+      key: gem-url
+      name: gem-config-map
+
+currencyManager:
+  name: currency-manager
+  # uncomment to use local image (default is from docker hub)
+  # image: currency-manager:latest
+  type: NodePort
+  nodePort: 30083
+  env:
+  - name: LOKI_URL
+    configMapKeyRef:
+      name: gem-config-map
+      key: loki-url
+  - name: HOSTNAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
+  - name: CURRENCY_MANAGER_DB_URI
+    secretKeyRef:
+      name: gem-secret
+      key: currency-manager-db-uri  
+
+emailSender:
+  name: email-sender
+  # uncomment to use local image (default is from docker hub)
+  # image: email-sender:latest
+  type: NodePort
+  nodePort: 30084
+  env:
+  - name: LOKI_URL
+    configMapKeyRef:
+      name: gem-config-map
+      key: loki-url
+  - name: HOSTNAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
+  - name: EMAIL_USERNAME
+    secretKeyRef:
+      name: gem-secret
+      key: email-username
+  - name: EMAIL_PASSWORD
+    secretKeyRef:
+      name: gem-secret
+      key: email-password
+
+expenseManager:
+  name: expense-manager
+  # uncomment to use local image (default is from docker hub)
+  # image: expense-manager:latest
+  type: NodePort
+  nodePort: 30085
+  env:
+  - name: LOKI_URL
+    configMapKeyRef:
+      name: gem-config-map
+      key: loki-url
+  - name: HOSTNAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
+  - name: EXPENSE_MANAGER_DB_URI
+    secretKeyRef:
+      name: gem-secret
+      key: expense-manager-db-uri    
+
+financeAdapter:
+  name: finance-adapter
+  # uncomment to use local image (default is from docker hub)
+  # image: finance-adapter:latest
+  type: NodePort
+  nodePort: 30086
+  env:
+    - name: LOKI_URL
+      configMapKeyRef:
+        name: gem-config-map
+        key: loki-url
+    - name: HOSTNAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    - name: FINANCE_ADAPTER_DB_URI
+      secretKeyRef:
+        name: gem-secret
+        key: finance-adapter-db-uri 
+
+groupManager:
+  name: group-manager
+  # uncomment to use local image (default is from docker hub)
+  # image: group-manager:latest
+  type: NodePort
+  nodePort: 30087
+  env:
+  - name: LOKI_URL
+    configMapKeyRef:
+      name: gem-config-map
+      key: loki-url
+  - name: HOSTNAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
+  - name: GROUP_MANAGER_DB_URI
+    secretKeyRef:
+      name: gem-secret
+      key: group-manager-db-uri      
+
+userDetailsManager:
+  name: user-details-manager
+  # uncomment to use local image (default is from docker hub)
+  # image: user-details-manager:latest
+  type: NodePort
+  nodePort: 30088
+  env:
+  - name: LOKI_URL
+    configMapKeyRef:
+      name: gem-config-map
+      key: loki-url
+  - name: HOSTNAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
+  - name: USER_DETAILS_MANAGER_DB_URI
+    secretKeyRef:
+      name: gem-secret
+      key: user-details-manager-db-uri     
+
+paymentManager:
+  name: payment-manager
+  # uncomment to use local image (default is from docker hub)
+  # image: payment-manager:latest
+  type: NodePort
+  nodePort: 30089
+  env:
+  - name: LOKI_URL
+    configMapKeyRef:
+      name: gem-config-map
+      key: loki-url
+  - name: HOSTNAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
+  - name: PAYMENT_MANAGER_DB_URI
+    secretKeyRef:
+      name: gem-secret
+      key: payment-manager-db-uri
+
+reportCreator:
+  name: report-creator
+  # uncomment to use local image (default is from docker hub)
+  # image: report-creator:latest
+  type: NodePort
+  nodePort: 30090
+  env:
+    - name: LOKI_URL
+      configMapKeyRef:
+        name: gem-config-map
+        key: loki-url
+    - name: HOSTNAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    - name: REPORT_CREATOR_DB_URI
+      secretKeyRef:
+        name: gem-secret
+        key: report-creator-db-uri

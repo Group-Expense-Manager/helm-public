@@ -1,0 +1,6 @@
+dependencies:
+- name: gem-lib
+  repository: file://../gem-lib
+  version: 0.1.0
+digest: sha256:e5266a7b152d6896adaba874f914554518002106dd4da15712a41c2b45ae1295
+generated: "2024-07-28T18:40:03.771425812+02:00"
