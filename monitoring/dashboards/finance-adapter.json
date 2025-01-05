@@ -3964,7 +3964,7 @@
       {
         "hide": 2,
         "name": "service",
-        "query": "finanse-adapter",
+        "query": "finance-adapter",
         "skipUrlSync": true,
         "type": "constant"
       },
@@ -4129,8 +4129,8 @@
     ]
   },
   "timezone": "",
-  "title": "finanse-adapter",
-  "uid": "finanse-adapter",
+  "title": "finance-adapter",
+  "uid": "finance-adapter",
   "version": 1,
   "weekStart": ""
 }
